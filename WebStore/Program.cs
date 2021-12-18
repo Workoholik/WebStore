@@ -1,7 +1,7 @@
-var builder = WebApplication.CreateBuilder(args);
+ï»¿var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// Ïîäòÿíåì äàííûå èç êîíôèãà
+// ÐŸÐ¾Ð´Ñ‚ÑÐ½ÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð°
 app.MapGet("/", () => app.Configuration["CustomGreetings"]);
 
 app.Run();
