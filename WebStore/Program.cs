@@ -1,6 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+// Подтянем данные из конфига
+app.MapGet("/", () => app.Configuration["CustomGreetings"]);
 
 app.Run();
