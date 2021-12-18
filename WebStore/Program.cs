@@ -25,6 +25,11 @@ app.MapGet("/throw", () => {
     throw new ApplicationException(configurations["CustomException"]);
 });
 
-app.MapDefaultControllerRoute();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+
+// app.MapDefaultControllerRoute();
 
 app.Run();
