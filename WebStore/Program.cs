@@ -1,11 +1,14 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.Extensions.Configuration;
+
+var builder = WebApplication.CreateBuilder(args);
 
 var configurations = builder.Configuration;
 var services = builder.Services;
 
 
-configurations.AddJsonFile("appsettings.Custom.json", true, true);
-configurations.AddCommandLine(args);
+configurations
+    .AddJsonFile("appsettings.Custom.json", true, true)
+    .AddCommandLine(args);
 
 services.AddControllersWithViews();
 
@@ -16,13 +19,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();    
 }
-
+ 
 
 app.UseRouting();
 
 // app.MapGet("/", () => configurations["CustomGreetings"]);
 app.MapGet("/throw", () => {
-    throw new ApplicationException(configurations["CustomException"]);
+    throw new ApplicationException(configurations.GetSection("Custom")["Exception"]);
 });
 
 app.MapControllerRoute(
