@@ -13,7 +13,7 @@ namespace WebStore.Controllers
         public IActionResult Index()
         { 
 
-            return View("Index");
+            return View("~/Views/Home/Index.cshtml");
         }
 
         public string ConfiguredAction(string id, string Value1)
