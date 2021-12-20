@@ -40,9 +40,16 @@ namespace WebStore.Controllers
             return View(__Menu);
         }
 
-        public IActionResult Employees()
-        {
-            return View(__Employee);
+        public IActionResult Employees(int id)
+        { 
+            if (id > 0)
+            {
+                return View("Employee", __Employee[id-1]);
+            } 
+            else
+            {
+                return View("Employees", __Employee);
+            }
         }
 
         public string ConfiguredAction(string id, string Value1)
