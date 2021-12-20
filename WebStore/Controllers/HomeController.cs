@@ -18,7 +18,7 @@ namespace WebStore.Controllers
 
         public string ConfiguredAction(string id, string Value1)
         { 
-            return $"ID: {id}, Value1: {Value1}, CustomController: {this.CustomControllerContent}";
+            return $"ID: {id}, Value1: {Value1}, CustomControllerContent: {this.CustomControllerContent}";
         }
 
     }

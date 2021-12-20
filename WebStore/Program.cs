@@ -2,14 +2,13 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configurations = builder.Configuration;
 var services = builder.Services;
+var configurations = builder.Configuration;
 
 
 configurations
     .AddJsonFile("appsettings.Custom.json", true, true)
-    .AddCommandLine(args);
-
+    .AddCommandLine(args); 
 services.AddControllersWithViews();
 
 
@@ -22,8 +21,7 @@ if (app.Environment.IsDevelopment())
  
 
 app.UseRouting();
-
-// app.MapGet("/", () => configurations["CustomGreetings"]);
+ 
 app.MapGet("/throw", () => {
     throw new ApplicationException(configurations.GetSection("Custom")["Exception"]);
 });
