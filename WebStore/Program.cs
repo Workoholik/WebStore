@@ -30,6 +30,15 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();    
 } 
 
+app.UseStaticFiles(
+/*
+    // Загружать любые файлы,в том числе исполняемые    
+    new StaticFileOptions {
+        ServeUnknownFileTypes = true
+    }
+*/
+);
+
 app.UseRouting();
  
 app.MapGet("/throw", () => {
