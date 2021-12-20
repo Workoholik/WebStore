@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WebStore.Models.Menu>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Главная страница</title>
+    </head>
+    <body>
+        <div style="float: left; width: 100%; margin: 10px 0">
+            <h1 style="display: block; float: left; padding: 0; margin: 0 50px 0 0">
+                <a href="~/home" style="padding:10px 10px 15px 10px; line-height: 20px; border: solid 1px gray; color: black; text-decoration: none">главная</a>
+            </h1>
+            <ul style="display: block; float: left; padding: 0; margin: 0; border: solid 1px gray;">
+                @foreach (var menu in Model)
+                {
+                    <li style="display: block; float: left; padding: 10px 20px; line-height: 20px">
+                        <a href="~/home/@menu.Code">@menu.Title</a>
+                    </li> 
+                } 
+            </ul>
+        </div>
+        <div style="float: left; width: 100%">
+
+        </div>
+    </body>
+</html>
