@@ -1,35 +1,39 @@
 ﻿@model IEnumerable<WebStore.Models.Employee>
-
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Employees</title>
+        <title>Сотрудники</title>
     </head>
-    <body>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>LastName</th>
-                    <th>FirstName</th>
-                    <th>Patronymic</th>
-                    <th>Age</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(var employee in Model)
-                {
-                <tr>
-                    <td>@employee.Id</td>
-                    <td>@employee.LastName</td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.Patronymic</td>
-                    <td>@employee.Age</td>
-                </tr>
-            }
-            </tbody>
-        </table>
-        
-        <a href="~/home">Главная</a>
+    <body>  
+        <div style="float: left; width: 100%; margin: 10px 0">
+            <h1 style="display: block; float: left; padding: 0; margin: 0 50px 0 0">
+                <a href="~/home" style="padding:10px 10px 15px 10px; line-height: 20px; border: solid 1px gray; color: black; text-decoration: none">главная</a>
+            </h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Отчетство</th>
+                        <th>Возраст</th>
+                        <th>Подразделение</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var employee in Model)
+                    {
+                    <tr style="text-align: center">
+                        <td style="padding: 5px 15px">@employee.Id</td>
+                        <td style="padding: 5px 15px">@employee.LastName</td>
+                        <td style="padding: 5px 15px">@employee.FirstName</td>
+                        <td style="padding: 5px 15px">@employee.Patronymic</td>
+                        <td style="padding: 5px 15px">@employee.Age</td>
+                        <td style="padding: 5px 15px">@employee.Department.Title</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
     </body>
-</html>
+</html> 
