@@ -24,7 +24,9 @@ namespace WebStore.Controllers
         };
 
         public IActionResult Index()
-        { 
+        {
+            ViewData["Title"] = "Employees";
+
             List<Employee> result = __Employees; 
             return View(result);
         }
@@ -34,6 +36,9 @@ namespace WebStore.Controllers
             var result = __Employees.FirstOrDefault(e => e.Id == Id);
             if (result is null)
                 return NotFound();
+
+            ViewData["Title"] = "Employee " + result.FirstName;
+            ViewData["CustomTitle"] = result;
 
             return View("Details", result);
         }
