@@ -16,7 +16,7 @@
             <tr >
                 <td>@employee.Id</td>
                 <td>
-                    <a href="~/home/employees/@employee.Id">@employee.ShortName()</a>
+                    <a asp-controller="Employees" asp-action="Details" asp-route-Id="@employee.Id">@employee.ShortName()</a>
                 </td>
                 <td>@employee.Age</td>
                 <td>@employee.Department.Title</td>

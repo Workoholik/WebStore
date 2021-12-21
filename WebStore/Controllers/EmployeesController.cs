@@ -16,23 +16,26 @@ namespace WebStore.Controllers
             },
         };
 
-        private static readonly List<Employee> __Employee = new()
+        private static readonly List<Employee> __Employees = new()
         {
             new Employee { Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", Age = 25, Department = department["IT"] },
             new Employee { Id = 2, LastName = "Петров", FirstName = "Петр", Patronymic = "Петрович", Age = 32, Department = department["IT"] },
             new Employee { Id = 3, LastName = "Сидоров", FirstName = "Сидр", Patronymic = "Сидорович", Age = 46, Department = department["bookkeping"] }
         };
 
-        public IActionResult Index(int id)
+        public IActionResult Index()
+        { 
+            List<Employee> result = __Employees; 
+            return View(result);
+        }
+
+       public IActionResult Details(int Id)
         {
-            if (id > 0)
-            {
-                return View("Employee", __Employee[id - 1]);
-            }
-            else
-            {
-                return View(__Employee);
-            }
+            var result = __Employees.FirstOrDefault(e => e.Id == Id);
+            if (result is null)
+                return NotFound();
+
+            return View("Details", result);
         }
     }
 }
