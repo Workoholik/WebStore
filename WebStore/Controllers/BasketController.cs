@@ -2,10 +2,9 @@
 
 namespace WebStore.Controllers
 {
-    public class BlogsController : Controller
+    public class BasketController : Controller
     {
         public IActionResult Index() => View();
-
-        public IActionResult Details() => View();
+        public IActionResult Checkout() => View();
     }
 }
