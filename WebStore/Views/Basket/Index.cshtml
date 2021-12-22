@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@{
+    ViewBag.Title = "Basket";
+} 
+<section id="cart_items">
+	<div class="container">
+		<partial name="Partial/_Nav"/> 	
+		<div class="table-responsive cart_info">
+			<table class="table table-condensed">
+				<thead>
+					<tr class="cart_menu">
+						<td class="image">Item</td>
+						<td class="description"></td>
+						<td class="price">Price</td>
+						<td class="quantity">Quantity</td>
+						<td class="total">Total</td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<partial name="~/Views/Catalog/Partial/CatalogCard/_CatalogCardBasket.cshtml"/> 
+					<partial name="~/Views/Catalog/Partial/CatalogCard/_CatalogCardBasket.cshtml"/> 
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section> <!--/#cart_items-->
+
+<section id="do_action">
+	<partial name="Partial/_FormPayment"/> 
+</section><!--/#do_action-->

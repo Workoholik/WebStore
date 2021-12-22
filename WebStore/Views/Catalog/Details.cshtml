@@ -1,2 +1,26 @@
-﻿@{
+﻿@model IEnumerable<WebStore.Models.Product>
+@{
+    ViewBag.Title = "Product";
 }
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="left-sidebar"> 
+				    <partial name="Partial/_CatalogLeftSideBar"/>
+				    <partial name="Partial/_CatalogBannerLeftSideBar"/> 
+				</div>
+			</div>
+				
+			<div class="col-sm-9 padding-right">
+				<div class="product-details"><!--product-details-->
+				    <partial name="Partial/CatalogDetail/_CatalogDetailPhoto"/>
+				    <partial name="Partial/CatalogDetail/_CatalogDetailInfo"/>
+				</div>
+				<partial name="Partial/CatalogDetail/_CatalogCategoryTab"/>
+				<partial name="~/Views/Home/Partial/_RecomendedItems.cshtml"/> 
+			</div>
+		</div>
+	</div>
+</section>
+	

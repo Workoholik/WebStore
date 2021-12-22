@@ -16,7 +16,7 @@
 			<div class="col-sm-9 padding-right">
 				<div class="features_items"><!--features_items-->
 					<h2 class="title text-center">Features Items</h2>  
-					@foreach (var product in Model)
+					@foreach (var product in Model.Take(12))
 					{
 						<partial name="Partial/CatalogCard/_CatalogCardList" model=product />
 					}
