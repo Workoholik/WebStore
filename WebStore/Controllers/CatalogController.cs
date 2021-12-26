@@ -3,7 +3,8 @@ using WebStore.Models;
 
 namespace WebStore.Controllers
 {
-    public class HomeController : Controller
+
+    public class CatalogController : Controller
     {
         private static readonly List<Product> __Products = new()
         {
@@ -27,19 +28,14 @@ namespace WebStore.Controllers
             new Product { Id = 18, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product10.jpg" },
             new Product { Id = 19, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product9.jpg" },
             new Product { Id = 120, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product8.jpg" },
-        }; 
-
-        private readonly string CustomControllerContent;
-        public HomeController(IConfiguration configuration)
-        {
-            this.CustomControllerContent = configuration.GetSection("Custom")["Controller"];
+        };
+         
+        public IActionResult Index()
+        { 
+            List<Product> result = __Products;
+            return View(result);
         }
 
-        public IActionResult Index() => View(__Products);
-
-        public IActionResult Contacts() => View();
-
-        public IActionResult Login() => View();
-
+        public IActionResult Details() => View(__Products);
     }
 }

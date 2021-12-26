@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WebStore.Models.Product>
+<div class="features_items"><!--features_items-->
+	<h2 class="title text-center">Features Items</h2>  
+	@foreach (var product in Model.Take(6))
+	{
+		<partial name="~/Views/Catalog/Partial/CatalogCard/_CatalogCardList.cshtml" model=product />
+	}						
+</div><!--features_items-->

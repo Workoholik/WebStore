@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebStore.Models.Product>
+<div class="category-tab shop-details-tab"><!--category-tab-->
+	<div class="col-sm-12">
+		<ul class="nav nav-tabs">
+			<li><a href="#details" data-toggle="tab">Details</a></li>
+			<li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
+			<li><a href="#tag" data-toggle="tab">Tag</a></li>
+			<li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+		</ul>
+	</div>
+	<div class="tab-content">
+		<div class="tab-pane fade" id="details" >
+			@foreach (var product in Model.Take(4))
+			{
+				<div class="col-sm-3">
+					<partial name="Partial/CatalogCard/_CatalogCardShort" model=product />
+				</div>
+			} 
+		</div>
+							
+		<div class="tab-pane fade" id="companyprofile" >
+			@foreach (var product in Model.Take(4))
+			{
+				<div class="col-sm-3">
+					<partial name="Partial/CatalogCard/_CatalogCardShort" model=product />
+				</div>
+			} 
+		</div>
+							
+		<div class="tab-pane fade" id="tag" >
+			@foreach (var product in Model.Take(4))
+			{
+				<div class="col-sm-3">
+					<partial name="Partial/CatalogCard/_CatalogCardShort" model=product />
+				</div>
+			} 
+		</div>
+							
+		<div class="tab-pane fade active in" id="reviews" >
+			<partial name="Partial/CatalogDetail/_CatalogDetailComment"/>
+		</div>
+							
+	</div>
+</div><!--/category-tab-->
