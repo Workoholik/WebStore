@@ -12,7 +12,7 @@
         public Department Department { get; set; }
 
         public string ShortName() {
-            return this.LastName + " " + this.FirstName.Substring(0, 1) + ". " + this.Patronymic.Substring(0, 1) + ".";
+            return this.LastName + " " + this.FirstName?.Substring(0, 1) + ". " + this.Patronymic?.Substring(0, 1) + ".";
         }
     }
 }

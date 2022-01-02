@@ -11,6 +11,7 @@
                 <th>ФИО</th>
                 <th>Возраст</th>
                 <th>Подразделение</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@
                 </td>
                 <td>@employee.Age</td>
                 <td>@employee.Department.Title</td>
+                <td>
+                    <a  asp-controller="Employees" asp-action="Edit" asp-route-Id="@employee.Id">edit</a>
+                </td>
             </tr>
         }
         </tbody>

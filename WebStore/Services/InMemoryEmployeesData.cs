@@ -53,8 +53,8 @@ namespace WebStore.Services
             if (db_employee is null)
                 return false;
              
-            db_employee.FirstName = employee.FirstName;
-            db_employee.LastName = employee.FirstName;
+            db_employee.FirstName = employee.FirstName; 
+            db_employee.LastName = employee.LastName;
             db_employee.Patronymic = employee.Patronymic;
             db_employee.Age = employee.Age;
 
