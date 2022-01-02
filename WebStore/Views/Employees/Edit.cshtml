@@ -1,4 +1,4 @@
-﻿@model EmployeeEditViewModel
+﻿@model EmployeeViewModel
 @{
     ViewBag.Title = "Employee Id edit";
 }
@@ -36,16 +36,11 @@
                     <span asp-validation-for="Age" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save" class="btn btn-warning" /> |
+                    <a asp-action="Index">Back to List</a>
                 </div>
             </form>
         </div>
-    </div>
-
-    <div>
-        <a asp-controller="Employees" asp-action="Index">Back to List</a>
-        <hr />
-        <a asp-controller="Employees" asp-action="Delete" id="@Model.Id">Delete</a>
-    </div>
+    </div> 
 </div>
 

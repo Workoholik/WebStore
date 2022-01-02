@@ -20,12 +20,20 @@
             <tr >
                 <td>@employee.Id</td>
                 <td>
-                    <a asp-controller="Employees" asp-action="Details" asp-route-Id="@employee.Id">@employee.ShortName()</a>
+                    <a asp-controller="Employees" asp-action="Details" asp-route-Id="@employee.Id">@employee.ShortName()</a> 
+                    <a  asp-controller="Employees" asp-action="Edit" asp-route-Id="@employee.Id">
+                        <i class="fa fa-edit"></i>
+                    </a>
                 </td>
                 <td>@employee.Age</td>
                 <td>@employee.Department.Title</td>
-                <td>
-                    <a  asp-controller="Employees" asp-action="Edit" asp-route-Id="@employee.Id">edit</a>
+                <td> 
+                    <a asp-controller="Employees" asp-action="Delete" asp-route-Id="@employee.Id" class="text-danger">
+                        <i class="fa fa-trash-o"></i>
+                    </a>
+                    <form asp-action="DeleteConfirmed" asp-route-Id="@employee.Id">
+                        <input type="submit" value="del" class="btn btn-sm btn-danger"/>
+                    </form>
                 </td>
             </tr>
         }
