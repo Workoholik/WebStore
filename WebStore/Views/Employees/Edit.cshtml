@@ -36,7 +36,10 @@
                     <span asp-validation-for="Age" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-warning" /> |
+                    <input type="submit" value="Save" class="btn btn-warning" /> 
+                    <a asp-controller="Employees" asp-action="Delete" asp-route-Id="@Model.Id" class="btn btn-danger text-danger">
+                        <i class="fa fa-trash-o"></i> Del
+                    </a>  |
                     <a asp-action="Index">Back to List</a>
                 </div>
             </form>

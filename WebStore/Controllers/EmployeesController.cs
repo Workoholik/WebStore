@@ -7,11 +7,16 @@ using WebStore.Services.Interfaces;
 namespace WebStore.Controllers
 { 
     public class EmployeesController : Controller
-    { 
+    {
+        private ILogger<EmployeesController> _Logger;
         private IEmployeesData __EmployeesData;
 
-        public EmployeesController(IEmployeesData EmployeesData) => __EmployeesData = EmployeesData;
-         
+        public EmployeesController(IEmployeesData EmployeesData, ILogger<EmployeesController> Logger)
+        {
+            _Logger = Logger;
+            __EmployeesData = EmployeesData;
+        }
+
         public IActionResult Index()
         {
             ViewData["Title"] = "Employees";
@@ -32,13 +37,19 @@ namespace WebStore.Controllers
             return View("Details", employee);
         }
 
-        public IActionResult Create() => View();
+        public IActionResult Create() => View("Edit", new EmployeeViewModel());
 
-        public IActionResult Edit(int Id)
+        public IActionResult Edit(int? Id)
         {
-            var employee = __EmployeesData.GetById(Id);
+            if (Id is null)
+                return View(new EmployeeViewModel());
+
+            var employee = __EmployeesData.GetById((int)Id);
             if (employee is null)
+            {
+                _Logger.LogWarning("Попытка редактирования не сущ. сотрудника с id:{0}", Id);
                 return NotFound();
+            }
 
             var model = new EmployeeViewModel
             {
@@ -64,7 +75,12 @@ namespace WebStore.Controllers
                 Age = Model.Age,
             };
 
-            if (!__EmployeesData.Edit(employee))
+            if (Model.Id == 0)
+            {
+                __EmployeesData.Add(employee);
+                _Logger.LogInformation("Создан новый сотрудник с id:{0}", employee.Id);
+            }
+            else if (!__EmployeesData.Edit(employee))
                 return NotFound();
 
             // обработка модели
@@ -97,6 +113,8 @@ namespace WebStore.Controllers
 
             if (!__EmployeesData.Delete(Id))
                 return NotFound();
+
+            _Logger.LogInformation("Cотрудник с id:{0} был удален", Id);
 
             // обработка модели
             return RedirectToAction("Index");
