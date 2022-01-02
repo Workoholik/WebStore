@@ -41,5 +41,7 @@ namespace WebStore.Controllers
 
         public IActionResult Login() => View();
 
+        public void Throw(string Message) => throw new ApplicationException(Message);
+
     }
 }

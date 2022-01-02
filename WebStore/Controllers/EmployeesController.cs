@@ -1,28 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStore.Models;
+using WebStore.Data;
+using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
+    [Route("Staff/{action=index}/{id?}")]
     public class EmployeesController : Controller
     {
-
-        private static readonly Dictionary<string, Department> department = new Dictionary<string, Department>()
-        {
-            {
-                "IT", new Department { Code = "it", Title = "IT" }
-            },
-            {
-                "bookkeping", new Department { Code = "bookkeping", Title = "Бухгалтерия" }
-            },
-        };
-
-        private static readonly List<Employee> __Employees = new()
-        {
-            new Employee { Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", Age = 25, Department = department["IT"] },
-            new Employee { Id = 2, LastName = "Петров", FirstName = "Петр", Patronymic = "Петрович", Age = 32, Department = department["IT"] },
-            new Employee { Id = 3, LastName = "Сидоров", FirstName = "Сидр", Patronymic = "Сидорович", Age = 46, Department = department["bookkeping"] }
-        };
-
+        private List<Employee> __Employees;
+        public EmployeesController() => __Employees = TestEmployee.Employees;
+         
         public IActionResult Index()
         {
             ViewData["Title"] = "Employees";
@@ -30,7 +18,7 @@ namespace WebStore.Controllers
             List<Employee> result = __Employees; 
             return View(result);
         }
-
+         
        public IActionResult Details(int Id)
         {
             var result = __Employees.FirstOrDefault(e => e.Id == Id);
@@ -42,5 +30,32 @@ namespace WebStore.Controllers
 
             return View("Details", result);
         }
+
+        public IActionResult Create() => View();
+        public IActionResult Edit(int Id)
+        {
+            var result = __Employees.FirstOrDefault(e => e.Id == Id);
+            if (result is null)
+                return NotFound();
+
+            var model = new EmployeeEditViewModel
+            {
+                Id = result.Id,
+                LastName = result.LastName,
+                FirstName = result.FirstName,
+                Patronymic = result.Patronymic,
+                Age = result.Age,
+            };
+
+            return View(model);
+        }
+        public IActionResult Edit(EmployeeEditViewModel Model)
+        {
+            // обработка модели
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id) => View();
+
     }
 }

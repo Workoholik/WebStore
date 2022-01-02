@@ -19,8 +19,10 @@ configurations
 services.AddControllersWithViews(opt => {
     opt.Conventions.Add(new TestConvention());
 });
+
 //services.AddMvc();
 //services.AddControllers();  //For WebAPI
+
 #endregion
 
 
@@ -53,11 +55,13 @@ app.UseRouting();
 
 app.UseMiddleware<TestMiddleware>();
 
-app.UseWelcomePage("/welcom");
  
 app.MapGet("/throw", () => {
     throw new ApplicationException(configurations.GetSection("Custom")["Exception"]);
 });
+
+app.UseWelcomePage("/welcom");
+
 
 app.MapControllerRoute(
     name: "default",
