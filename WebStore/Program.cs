@@ -2,6 +2,9 @@
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
 
+using WebStore.Services;
+using WebStore.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Настройка builder
@@ -19,6 +22,8 @@ configurations
 services.AddControllersWithViews(opt => {
     opt.Conventions.Add(new TestConvention());
 });
+
+services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
 //services.AddMvc();
 //services.AddControllers();  //For WebAPI
