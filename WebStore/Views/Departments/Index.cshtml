@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebStore.Models.Department>
+@{
+    ViewBag.Title = "Departments";
+}
+<div class="container">
+    <h3 style="display: inline-block;">Department <a asp-controller="Departments" asp-action="Edit" class="btn btn-default">+</a> </h3> / <a asp-controller="Employees" asp-action="Index">Employees</a>
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Title</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var department in Model)
+                {
+                <tr >
+                    <td>@department.Id</td>
+                    <td>
+                        <a asp-controller="Departments" asp-action="Details" asp-route-Id="@department.Id">@department.Code</a> 
+                        <a  asp-controller="Departments" asp-action="Edit" asp-route-Id="@department.Id">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td> 
+                    <td>@department.Title</td>
+                    <td> 
+                        <a asp-controller="Departments" asp-action="Delete" asp-route-Id="@department.Id" class="text-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <form asp-controller="Departments" asp-action="DeleteConfirmed" asp-route-Id="@department.Id">
+                            <input type="submit" value="del" class="btn btn-sm btn-danger"/>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    } else
+    {
+        <p>Departments not found :(</p>
+    }
+    <hr/>
+    <a asp-controller="Home" asp-action="Index">На главную</a>
+</div> 

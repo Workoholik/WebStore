@@ -1,4 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using WebStore.Infrastructure.Conventions;
+using WebStore.Infrastructure.Middleware;
+
+using WebStore.Services;
+using WebStore.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +18,17 @@ configurations
     .AddJsonFile("appsettings.Custom.json", true, true)
     .AddCommandLine(args); 
 
-services.AddControllersWithViews();
+
+services.AddControllersWithViews(opt => {
+    opt.Conventions.Add(new TestConvention());
+});
+
+services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+services.AddSingleton<IDepartmentsData, InMemoryDepartmentsData>();
+
+//services.AddMvc();
+//services.AddControllers();  //For WebAPI
+
 #endregion
 
 
@@ -28,7 +43,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment()) 
 {
     app.UseDeveloperExceptionPage();    
-} 
+}
+
+// простое промежуточное ПО
+app.Map("/testpath", async context => await context.Response.WriteAsync("Test Middleware"));
 
 app.UseStaticFiles(
 /*
@@ -40,10 +58,16 @@ app.UseStaticFiles(
 );
 
 app.UseRouting();
+
+app.UseMiddleware<TestMiddleware>();
+
  
 app.MapGet("/throw", () => {
     throw new ApplicationException(configurations.GetSection("Custom")["Exception"]);
 });
+
+app.UseWelcomePage("/welcom");
+
 
 app.MapControllerRoute(
     name: "default",
