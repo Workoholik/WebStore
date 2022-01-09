@@ -58,6 +58,7 @@ namespace WebStore.Controllers
                 FirstName = employee.FirstName,
                 Patronymic = employee.Patronymic,
                 Age = employee.Age,
+                Department = employee.Department.Id,
             };
 
             return View(model);
@@ -66,6 +67,17 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel Model)
         {
+            Department department = null ; 
+            if ((int)Model.Department > 0)
+            {
+                department = TestDepartment.Departments.Find(dep => dep.Id == Model.Department);
+            }
+
+            if (department is null)
+            {
+                department = TestDepartment.Departments.First();
+            }
+
             var employee = new Employee 
             {
                 Id = Model.Id,
@@ -73,6 +85,7 @@ namespace WebStore.Controllers
                 FirstName = Model.FirstName,
                 Patronymic = Model.Patronymic,
                 Age = Model.Age,
+                Department = department,
             };
 
             if (Model.Id == 0)

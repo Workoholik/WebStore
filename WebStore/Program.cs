@@ -24,6 +24,7 @@ services.AddControllersWithViews(opt => {
 });
 
 services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+services.AddSingleton<IDepartmentsData, InMemoryDepartmentsData>();
 
 //services.AddMvc();
 //services.AddControllers();  //For WebAPI

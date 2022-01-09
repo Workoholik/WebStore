@@ -1,4 +1,5 @@
-﻿@model EmployeeViewModel
+﻿@using WebStore.Data;
+@model EmployeeViewModel
 @{
     ViewBag.Title = "Employee Id edit";
 }
@@ -34,6 +35,24 @@
                     <label asp-for="Age" class="control-label"></label>
                     <input asp-for="Age" class="form-control" />
                     <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Department" class="control-label"></label>
+                    <select asp-for="Department"  class="form-control">
+                        @foreach(var department in TestDepartment.Departments)
+                        { 
+                            if (department.Id == Model.Department)
+                            {
+                                <option value="@department.Id" selected>@department.Title</option>
+                            } 
+                            else
+                            {
+                                <option value="@department.Id">@department.Title</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="Department" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-warning" /> 

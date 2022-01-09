@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using WebStore.Models;
+
 namespace WebStore.ViewModels
 {
     public class EmployeeViewModel
@@ -14,5 +16,7 @@ namespace WebStore.ViewModels
         public string Patronymic { get; set; }
 
         public int Age { get; set; }
+
+        public int Department { get; set; }
     }
 }
