@@ -31,10 +31,8 @@ services.AddSingleton<IDepartmentsData, InMemoryDepartmentsData>();
 
 #endregion
 
-
 // Сборка
 var app = builder.Build();
-
 
 #region Конфигурирование конвеера обработки входящих соединений
 
@@ -74,7 +72,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 #endregion
-
 
 // Запуск
 app.Run();

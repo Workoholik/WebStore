@@ -66,7 +66,22 @@ namespace WebStore.Controllers
 
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel Model)
-        {
+        { 
+            if (Model.LastName == "Bin" && Model.FirstName == "Asma")
+            {
+                ModelState.TryAddModelError("", "Not avaliable field");
+            }
+
+            if (Model.LastName == "Asma")
+            {
+                ModelState.TryAddModelError("LastName", "Not avaliable name");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(Model);
+            }
+
             Department department = null ; 
             if ((int)Model.Department > 0)
             {
