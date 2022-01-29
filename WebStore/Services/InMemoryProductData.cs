@@ -8,5 +8,5 @@ public class InMemoryProductData : IProductData
 {
     public IEnumerable<Section> GetSections() => TestSection.Sections;
 
-    public IEnumerable<Brand> GetBrand() => TestBrand.Brands;
+    public IEnumerable<Brand> GetBrands() => TestBrand.Brands;
 }
