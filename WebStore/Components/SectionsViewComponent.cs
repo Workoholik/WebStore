@@ -39,7 +39,7 @@ public class SectionsViewComponent : ViewComponent
                     Id = child.Id,
                     Name = child.Name,
                     Order = child.Order,
-                    Parent = child.Parent,
+                    Parent = parent_section,
                 });
             }
 
