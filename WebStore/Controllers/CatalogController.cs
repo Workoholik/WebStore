@@ -1,41 +1,49 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebStore.Domain;
 using WebStore.Models;
+using WebStore.Services.Interfaces;
+using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
 
     public class CatalogController : Controller
     {
-        private static readonly List<Product> __Products = new()
+        private readonly IProductData _ProductData;
+
+        public CatalogController(IProductData ProductData)
         {
-            new Product { Id = 1, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product12.jpg" },
-            new Product { Id = 2, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product11.jpg" },
-            new Product { Id = 3, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product10.jpg" },
-            new Product { Id = 4, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product9.jpg" },
-            new Product { Id = 5, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product8.jpg" },
-            new Product { Id = 6, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product12.jpg" },
-            new Product { Id = 7, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product11.jpg" },
-            new Product { Id = 8, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product10.jpg" },
-            new Product { Id = 9, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product9.jpg" },
-            new Product { Id = 10, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product8.jpg" },
-            new Product { Id = 11, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product12.jpg" },
-            new Product { Id = 12, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product11.jpg" },
-            new Product { Id = 13, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product10.jpg" },
-            new Product { Id = 14, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product9.jpg" },
-            new Product { Id = 15, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product8.jpg" },
-            new Product { Id = 16, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product12.jpg" },
-            new Product { Id = 17, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product11.jpg" },
-            new Product { Id = 18, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product10.jpg" },
-            new Product { Id = 19, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product9.jpg" },
-            new Product { Id = 120, Name = "Easy Polo Black Edition", Price = 56, Image = "/images/shop/product8.jpg" },
-        };
+            _ProductData = ProductData;
+        }
          
-        public IActionResult Index()
-        { 
-            List<Product> result = __Products;
-            return View(result);
+        public IActionResult Index(int? BrandId, int? SectionId)
+        {
+            var filter = new ProductFilter()
+            {
+                BrandId = BrandId,
+                SectionId = SectionId
+            };
+
+            var products = _ProductData.GetProducts(filter);
+
+            var catalog_model = new CatalogViewModel()
+            {
+                BrandId = BrandId,
+                SectionId = SectionId,
+                Products = products
+                    .OrderBy(p => p.Order)
+                    .Select(p => new ProductViewModel()
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Price =p.Price,
+                        ImageUrl = p.ImageUrl
+                    })
+            };
+
+            return View(catalog_model);
         }
 
-        public IActionResult Details() => View(__Products);
+        public IActionResult Details() => View(_ProductData);
     }
 }
