@@ -14,7 +14,7 @@ namespace TestConsole.Services
 
         public DataManager(IDataProcessor Processor)
         {
-            _Processor = Processor;
+            _Processor = Processor; 
         }
 
         public void ProcessData(IEnumerable<DataValue> Values)
