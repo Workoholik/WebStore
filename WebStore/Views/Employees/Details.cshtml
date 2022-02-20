@@ -1,8 +1,8 @@
 ﻿@model WebStore.Models.Employee
 @{
     ViewBag.Title = "Employee";
-}
-<div class="container"> 
+    Layout = "_LayoutContainer";
+} 
 
 <div>
     <h4>Employee - @ViewBag.CustomTitle.FirstName</h4>
@@ -51,5 +51,4 @@
         <i class="fa fa-trash-o"></i> Del
     </a> 
     <a asp-action="Index">Back to List</a>
-</div>
-</div>
+</div> 
